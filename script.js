@@ -35,13 +35,21 @@ function startGame() {
 
 function turnClick(square) {
 	turn (square.target.id, human_player);
+
+	//
+	// CHECK IF GAME IS TIED
+	//
 }
 
 function turn (squareId, player) {
 	original_board[squareId] = player;
 	document.getElementById(squareId).innerText = player;
-	let gameOver = checkGameOver(original_board, player, squareId);
+	let gameWon = checkGameOver(original_board, player);
 
+	if (gameWon)
+	{
+		// display game over message
+	}
 }
 
 function arrayContainsArray (superset, subset) {
@@ -50,7 +58,7 @@ function arrayContainsArray (superset, subset) {
   });
 }
 
-function checkGameOver(board, player, squareId) {
+function checkGameOver(board, player) {
 	// collect all id's of cells where player has already clicked
 	var used_squares = [];
 	for (var i = 0; i < board.length; i++)
@@ -79,8 +87,10 @@ function checkGameOver(board, player, squareId) {
 			//console.log(winning_combinations[i]);
 		}
 	}
+
+	return game_over;
 }
 
 function gameOver() {
-
+	startGame();	
 }
