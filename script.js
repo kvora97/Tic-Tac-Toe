@@ -7,14 +7,14 @@ const human_player = 'O';
 const ai_player = 'X';
 
 const winning_combinations = [
-	[0, 1, 2],
-	[3, 4, 5],
-	[6, 7, 8],
-	[0, 3, 6],
-	[1, 4, 7],
-	[2, 5, 8],
-	[0, 4 ,8],
-	[2, 4 ,6],  
+	["0", "1", "2"],
+	["3", "4", "5"],
+	["6", "7", "8"],
+	["0", "3", "6"],
+	["1", "4", "7"],
+	["2", "5", "8"],
+	["0", "4" ,"8"],
+	["2", "4" ,"6"],  
 ];
 
 //const cells = document.querySelectorAll('.cell');
@@ -44,9 +44,14 @@ function turn (squareId, player) {
 
 }
 
+function arrayContainsArray (superset, subset) {
+  return subset.every(function (value) {
+    return (superset.indexOf(value) >= 0);
+  });
+}
+
 function checkGameOver(board, player, squareId) {
-	// collect all cells where player has clicked
-	console.log("checkGameOver called");
+	// collect all id's of cells where player has already clicked
 	var used_squares = [];
 	for (var i = 0; i < board.length; i++)
 	{
@@ -57,8 +62,23 @@ function checkGameOver(board, player, squareId) {
 	}
 	// console.log(used_squares);
 
-	// check if any 3 cells lie in the winning combination
+	var game_over = false;
 
+	if (used_squares.length >= 3)
+	{
+		// check if any 3 cells lie in the winning winning_combinations
+		for (var i = 0; i < winning_combinations.length; i++)
+		{
+			console.log(used_squares);
+			if (arrayContainsArray(used_squares, winning_combinations[i]))
+			{
+				game_over = true;
+				console.log("GAME OVER");
+				break;
+			}
+			//console.log(winning_combinations[i]);
+		}
+	}
 }
 
 function gameOver() {
