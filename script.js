@@ -20,6 +20,7 @@ const winning_combinations = [
 //const cells = document.querySelectorAll('.cell');
 const cells = document.getElementsByClassName('cell');
 startGame();
+var turn_decider = 0;
 
 function startGame() {
 	//document.querySelector(".endgame").style.display = "none";
@@ -33,22 +34,47 @@ function startGame() {
 	}
 }
 
-function turnClick(square) {
-	turn (square.target.id, human_player);
+function whos_turn()
+{
+	if (turn_decider % 2 == 0)
+	{
+		turn_decider++;
+		return 0;
+	}
+	else
+	{
+		turn_decider++;
+		return 1;
+	}
+}
 
-	//
-	// CHECK IF GAME IS TIED
-	//
+function turnClick(square) {
+	var decider = whos_turn();
+	console.log(decider);
+	if (decider == 0)
+	{
+		turn (square.target.id, ai_player);
+	}
+	else
+	{
+		turn (square.target.id, human_player);
+	}
+
 }
 
 function turn (squareId, player) {
 	original_board[squareId] = player;
 	document.getElementById(squareId).innerText = player;
+	document.getElementById(squareId).removeEventListener('click', turnClick);
 	let gameWon = checkGameOver(original_board, player);
 
 	if (gameWon)
 	{
-		// display game over message
+		// remove event listeners for all cells
+		for (var i = 0; i < cells.length; i++)
+		{
+			cells[i].removeEventListener('click', turnClick);
+		}
 	}
 }
 
