@@ -1,3 +1,4 @@
+
 td {
 	border: 2px solid black;
 	height: 100px;
@@ -11,10 +12,13 @@ td {
 
 table {
 	border-collapse: collapse;
-	position: absolute;
-	left: 50%;
-	margin-left: -155px;
+
 	top: 50px;
+	margin-top: 20px;
+
+	/* MY STUFF */
+	margin-left: auto;
+	margin-right: auto;
 }
 
 table tr:first-child td {
@@ -33,7 +37,36 @@ table tr td:last-child {
 	border-right: 0; 
 }
 
-.endgame {
-	/* TODO */
+button {
+	display: block;
+	margin: 0 auto;
+	margin-bottom: 20px;
+	font-size: 20px;
+	cursor: pointer;
+}
+
+#endgame {
 	display: none;
+	width: 250px;
+	height: 40px;
+	background-color: red;
+	left: 50%;
+	margin: 0 auto;
+	font-family: "Calibri";
+	font-size: 30px;
+	text-align: center;
+	border-radius: 5px;
+}
+
+#tiedgame {
+	display: none;
+	width: 250px;
+	height: 40px;
+	background-color: skyblue;
+	left: 50%;
+	margin: 0 auto;
+	font-family: "Calibri";
+	font-size: 30px;
+	text-align: center;
+	border-radius: 5px;
 }
